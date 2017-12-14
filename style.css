@@ -1,0 +1,83 @@
+body {
+  font: 14px "Arial";
+}
+
+input[type=text],input[type=password]{
+	width: 100%;
+	padding: 12px 20px;
+    margin: 8px 0;
+	display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=file]{
+	background-color: black;
+	color:white;
+	padding: 14px 20px;
+	margin:8px 0;
+	border:none;
+}
+
+button,input[type=submit] {
+	background-color: black;
+	color:white;
+	padding: 14px 20px;
+	margin:8px 0;
+	border:none;
+	width:100%;
+}
+
+button:hover,input[type=submit]:hover {
+    opacity: 0.8;
+}
+
+#esq{
+	width:300px;
+	padding:10px;
+	height:100%;
+}
+
+.link{
+	color:grey;
+}
+
+a:visited{
+	color:black;
+}
+
+#tasks{
+	float:left;
+	position:absolute;
+	left: 350px;
+	top:15px;
+	width:500px;
+}
+
+th{
+	background-color:black;
+	color:white;
+}
+
+table{
+	padding: 10px 20px;
+    margin: 10px 2;
+	display: inline-block;
+	text-align: center;
+	vertical-align: center;
+	
+}
+
+td{
+	border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+
+table button{
+	background-color: black;
+	color:white;
+	border:none;
+}

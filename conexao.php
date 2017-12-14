@@ -1,27 +1,19 @@
 <?php
 
+session_start();
+if(!isset($_SESSION["email"]) || !isset($_SESSION["senha"])){
+	header("Location: login.php");
+	exit;
+}
+
+
 function abrirBanco(){
 	$db = new PDO('mysql:host=localhost;dbname=crud;charset=utf8mb4', 'root', '');
 	return $db;
 }
 
-/*function todasTasks(){
-	$db = abrirBanco();
-
-	$query = "SELECT * FROM task";
-	$stmt = $db->prepare($query);
-	$stmt->execute();
-	
-
-	while($row = $stmt->fetch(PDO::FETCH_NUM)){
-		$grupo[] = $row;
-	}
-
-	return $grupo;
-}*/
-
 function selectId($id){
-	$db = abrirBanco();
+	$db = new PDO('mysql:host=localhost;dbname=crud;charset=utf8mb4', 'root', '');
 
 	$query = "SELECT * FROM task WHERE idTask=".$id;
 	$stmt = $db->prepare($query);
@@ -67,19 +59,21 @@ if($acao=="excluir"){
 	$id = "";
 	$id = isset($_POST['id']) ? $_POST['id'] : '';
 	$id = !empty($_POST['id']) ? $_POST['id'] : '';
-	echo $id;
 
-	$query = "DELETE FROM task WHERE id='$id'";
+	$query = "DELETE FROM task WHERE idTask='$id'";
 
 	$stmt = $db->prepare($query);
 	$stmt->execute();
 	
-	echo $id;
-	//voltarIndex();
+	voltarIndex();
 }
 
 if($acao=="alterar"){
 	$db = abrirBanco();
+
+	$id = "";
+	$id = isset($_POST['id']) ? $_POST['id'] : '';
+	$id = !empty($_POST['id']) ? $_POST['id'] : '';
 
 	$nome = "";
 	$nome = isset($_POST['nome']) ? $_POST['nome'] : '';
@@ -89,7 +83,7 @@ if($acao=="alterar"){
 	$descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
 	$descricao = !empty($_POST['descricao']) ? $_POST['descricao'] : '';
 
-	$query = "UPDATE task SET nome='$nome', descricao='$descricao'";
+	$query = "UPDATE task SET nome='$nome', descricao='$descricao' WHERE idTask='$id'";
 
 	$stmt = $db->prepare($query);
 	$stmt->execute(array($nome,$descricao));

@@ -1,17 +1,6 @@
 <html>
 	<head>
 		<title>Autenticando</title>
-
-		<script type="text/javascript">
-			function logincomsucesso(){
-				setTimeout("window.location='index.php'", 5000);
-			}
-
-			function loginfailed(){
-				setTimeout("window.location='login.php'", 5000);
-			}
-		</script>
-
 	</head>
 	<body></body>
 </html>
@@ -37,12 +26,10 @@ if ($rows>0){
 	session_start();
 	$_SESSION['email']=$_POST['email'];
     $_SESSION['senha']=$_POST['senha'];
-    echo "Você foi autenticado com sucesso!";
-    echo "<script>logincomsucesso()</script>";
+    echo "<script>alert('Você foi autenticado com sucesso!');window.location.href='index.php'</script>";
 }
 else{
-	echo "Autenticação falhou!";
-	echo "<script>loginfailed()</script>";
+	echo "<script>alert('Autenticação falhou!');window.location.href='login.php'</script>";
 }
 
 ?>

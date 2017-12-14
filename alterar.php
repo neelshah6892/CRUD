@@ -1,22 +1,12 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=crud;charset=utf8mb4', 'root', '');
-
-session_start();
-if(!isset($_SESSION["email"]) || !isset($_SESSION["senha"])){
-	header("Location: login.php");
-	exit;
-}
+include("conexao.php");
 
 $outra = "";
-$outra = isset($_POST['idTask']) ? $_POST['idTask'] : '';
-$outra = !empty($_POST['idTask']) ? $_POST['idTask'] : '';
+$outra = isset($_POST['id']) ? $_POST['id'] : '';
+$outra = !empty($_POST['id']) ? $_POST['id'] : '';
 
-include("conexao.php");
-$selecao = selectId($outra);
-//var_dump($selecao);
-
-echo $selecao;
+$registro = selectId($outra);
 
 ?>
 
@@ -30,26 +20,29 @@ echo $selecao;
  </head>
  <body>
  	<div id="esq">
-	 	<form name="tarefas" action="conexao.php" method="post">			
-	 		<?php 
-	 			$query = "select * from task";
-				$users = $db->query($query);
-
-	 		?>
+	 	<form name="tarefas" action="conexao.php" method="post" enctype="multipart/form-data">			
 	 		<label><b>Código da Task</b></label>
-	 		<input type="text" name="codTask" value="<?php $users["idTask"] ?>" disabled>
+	 		<input type="text" name="codTask" value="
+	 		<?php echo $registro['idTask'] ?>
+	 		" disabled />
+	 		<br /><br />
 
 	 		<label><b>Nome da Task</b></label>
-	 		<input type="text" name="nome" size="20" value="<?php $suers["nome"] ?>" required>
+	 		<input type="text" name="nome" size="20" value="<?php echo $registro['nome'] ?>" required>
+	 		<br /><br />
 
 	 		<label><b>Descrição</b></label>
-	 		<input type="text" name="descricao" size="50" value="<?php $users["descricao"] ?>" required>
+	 		<input type="text" name="descricao" size="50" value="<?php echo $registro['descricao'] ?>" required>
+	 		<br /><br />
 
-	 		<label><b>Anexo</b></label>
+	 		<label><b>Anexo</b></label><br /><br />
+	 		<input type="file" name="fileToUpload" id="fileToUpload">
+	 		<br /><br />
+	 		
 	 		<input type="hidden" name="acao" value="alterar" />
-	 		<input type="hidden" name="id" value="<?php $users["idTask"] ?>" />
+	 		<input type="hidden" name="id" value="<?php echo $registro['idTask'] ?>" />
 	 		<input type="submit" name="Enviar" value="alterar" />
-	 		<a href="logout.php">Sair</a>
+	 		<a href="index.php">Voltar</a>
 	 	</form>
  	</div>
 
